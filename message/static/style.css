@@ -1,0 +1,57 @@
+body {
+    margin: 100px auto;
+    max-width: 580px;
+    font-size: 14px;
+    font-family: Microsoft YaHei, Arial, serif;
+    background: url("https://www.shejidaren.com/wp-content/themes/Daren/images/bg.jpg") 0 0 rgb(229, 230, 208);
+}
+
+.user_ico {
+    width: 40px;
+}
+
+.message-list {
+    /*list-style-type: none;*/
+    padding-left: 30px  ;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.message-list li {
+    padding: 12px 24px;
+    border-bottom: 1px solid #ddd;
+}
+
+label {
+    padding: 12px 24px;
+}
+
+button {
+    outline: none;
+    text-decoration: none;
+    background: #2f435e;
+    color: #f2f2f2;
+    font-size: 16px;
+    border-radius: 30px;
+    transition: all linear 0.30s;
+}
+
+
+.text {
+    box-sizing: border-box;
+    text-align: center;
+    height: 2.7em;
+    border-radius: 4px;
+    border: 1px solid #c8cccf;
+    color: #6a6f77;
+    display: inline;
+    outline: 0;
+    padding: 0 1em;
+    text-decoration: none;
+    width: 80%;
+    float: left;
+}
+.delete{
+    float: right;
+    /*color: darkslategray;*/
+}

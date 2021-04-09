@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ name }}的留言板</title>
+    <link rel="stylesheet" href="{% static "style.css" %}">
+    <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js"></script>
+</head>
+<body>
+<h2>
+    <img class="user_ico" src="{% static "a.jpg" %}" alt="头部图">
+    {{ name }}-留言板
+</h2>
+{#<p>{{ content|length }}条留言</p>#}
+<ol class="message-list">
+    {% for s in content %}
+        <li>{{ s.mb_content }}
+            <button type="button" class="delete" data-src="{{ s.id }}">删除</button>
+        </li>
+    {% endfor %}
+
+
+</ol>
+<label>
+    <input type="text" class="text" placeholder="添加留言"/>
+    <button type="button" id="msg_btn">提交</button>
+</label>
+</body>
+<script>
+    $(function () {
+        $("#msg_btn").on({
+            click: () => {
+                let message = $("input").val();
+                if (!$.trim(message)) {
+                    alert("请输入留言内容后再提交哦~");
+                    return;
+                }
+                $.post("add/", {"message": message}, (data, status) => {
+                    let data_arr = data.data;
+                    let data_code = data.code;
+                    let data_text = data.text;
+                    if (data_code === 400) {
+                        alert(data_text);
+                        return;
+                    }
+                    if (data_code === 200) {
+                        $("ol").append("<li>" + data_arr["message"] + ' <button type="button" class="delete" data-src="' + data_arr['id'] + '">删除</button></li>\n');
+                        $("input").val("");
+                    }
+                }, "json");
+            },
+        });
+        $("li").on(
+            "click",
+            ".delete",
+            function () {
+                let msg_id = $(this).attr("data-src");
+                $.post("delete/", {msg_id: msg_id}, (data, status) => {
+                    let data_code = data.code;
+                    let data_text = data.text;
+                    if (data_code === 400) {
+                        alert(data_text);
+                        return;
+                    }
+                    if (data_code === 200) {
+                        $(this).parent().remove();
+                    }
+                })
+            }
+        )
+
+
+    })
+
+</script>
+</html>
